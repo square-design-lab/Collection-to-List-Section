@@ -1,0 +1,98 @@
+/* ==================================================================
+   Squarespace — Collection → List Section Sync  v1.0
+   Square Design Lab
+   Visibility, animation-reset and layout styles for synced sections.
+   ================================================================== */
+
+/* Store items: title + price on one row. */
+.list-item.store-item .list-item-content__title {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ------------------------------------------------------------------ */
+/*  IMAGE VISIBILITY  (prevents original-image flicker while syncing)  */
+/* ------------------------------------------------------------------ */
+body:not(.sqs-edit-mode-active) .page-section:has(.list-section-title) .user-items-list li img {
+  opacity: 0 !important;
+}
+.page-section:has(.list-section-title)[data-list-section-sync="initialized"] .user-items-list li img[src*="isSyncedImage=true"] {
+  opacity: 1 !important;
+}
+body:not(.sqs-edit-mode-active) .page-section:has(.list-section-title)[data-list-section-sync="false"] .user-items-list li img {
+  opacity: 1 !important;
+}
+
+/* ------------------------------------------------------------------ */
+/*  TITLE VISIBILITY  (hide the {sync=...} tag until cleaned up)       */
+/* ------------------------------------------------------------------ */
+body:not(.sqs-edit-mode-active) .page-section .list-section-title {
+  display: none;
+}
+body:not(.sqs-edit-mode-active) .page-section[data-list-section-sync="initialized"] .list-section-title,
+body:not(.sqs-edit-mode-active) .page-section[data-list-section-sync="false"] .list-section-title {
+  display: block;
+}
+
+/* Error messages: hidden on the live site, shown to editors for debugging. */
+.list-section-title .sdl-error {
+  display: none;
+}
+body.sqs-edit-mode .list-section-title .sdl-error {
+  display: block;
+  font-size: 16px;
+  letter-spacing: 0px;
+  font-weight: 400;
+  text-transform: initial;
+  font-style: normal;
+}
+
+/* ------------------------------------------------------------------ */
+/*  IMAGE LINK OVERLAY                                                 */
+/* ------------------------------------------------------------------ */
+[data-list-section-sync="initialized"] .image-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------------------------------------ */
+/*  GLOBAL ANIMATION RESETS                                            */
+/*  Squarespace list-section animations conflict with synced render.  */
+/* ------------------------------------------------------------------ */
+[data-list-section-sync="initialized"] .preFade {
+  opacity: 1;
+}
+[data-list-section-sync="initialized"] .preScale {
+  opacity: 1;
+  transform: scale(1);
+}
+[data-list-section-sync="initialized"] .preSlide {
+  opacity: 1;
+  transform: initial;
+}
+[data-list-section-sync="initialized"] .preClip {
+  opacity: 1;
+  transform: translateZ(0);
+  clip-path: initial;
+  -webkit-clip-path: initial;
+}
+
+/* Flex */
+[data-list-section-sync="initialized"] li .preFlex {
+  opacity: 1;
+  transform: initial;
+  clip-path: initial;
+  -webkit-clip-path: initial;
+}
+[data-list-section-sync="initialized"] li [data-animation-role="image"].preFlex {
+  transform: initial;
+  clip-path: initial;
+  -webkit-clip-path: initial;
+}
+[data-list-section-sync="initialized"] li .animation-segment-parent-hidden {
+  opacity: 1;
+}

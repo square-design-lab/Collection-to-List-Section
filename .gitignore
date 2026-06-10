@@ -1,0 +1,6 @@
+﻿.DS_Store
+Thumbs.db
+
+# Source-reference files — never deploy to git
+plugin.js
+plugin.css
